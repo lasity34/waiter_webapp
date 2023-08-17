@@ -25,8 +25,7 @@
   "contributors": [],
   "scripts": {
     "dev": "",
-    "test": "",
-    "start": "node index.js"
+    "test": ""
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
