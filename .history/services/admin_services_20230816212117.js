@@ -1,0 +1,53 @@
+import bcrypt from 'bcrypt'
+
+
+
+export default function adminService(db) {
+    
+        async function getAdminByUsername(username) {
+            return await db.oneOrNone('SELECT * FROM waiters_schedule.admins WHERE username = $1', [username])
+        }
+
+
+        async function verifyPassword(password, hash) {
+            return new Promise((resolve, reject) => {
+                bcrypt.compare(password, hash, function(err, result) {
+                    if (err) reject(err);
+                    resolve(result)
+                })
+            })
+        }
+
+        async function createUser(username, password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            const query = `
+              INSERT INTO waiters (username, password)
+              VALUES ($1, $2)
+              RETURNING *;
+            `;
+            return await db.oneOrNone(query, [username, hashedPassword]);
+          }
+        
+
+          async function listWaiters() {
+            return await db.any('SELECT username FROM waiters');
+          }
+
+
+
+        return {
+            getAdminByUsername,
+            verifyPassword,
+            createUser,
+            listWaiters
+        }
+
+
+}
+
+
+
+
+
+
+
