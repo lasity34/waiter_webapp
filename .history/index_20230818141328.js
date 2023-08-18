@@ -69,8 +69,6 @@ app.get("/days", waiterRoute.showAvailableDays);
 app.post("/login", authRouter.login);
 
 
-
-
 const PORT = process.env.PORT || 3012;
 
 app.listen(PORT, function () {

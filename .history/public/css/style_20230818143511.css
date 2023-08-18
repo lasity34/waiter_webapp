@@ -68,13 +68,11 @@ input {
     border-spacing: 5px; /* This adds space between the cells */
 }
 
-
 .schedule th,
 .schedule td {
     border: 1px solid #ccc;
-    padding: 15px; /* Increase padding for bigger cells */
+    padding: 10px;
     text-align: center;
-    min-width: 100px; /* Minimum width for the cells */
 }
 
 .schedule th {
@@ -194,7 +192,6 @@ input {
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
-  text-decoration: none;
   transition: background-color 0.3s ease;
   text-align: center;
   display: block; /* Makes the button take up the full width of its container */
@@ -205,3 +202,11 @@ input {
   background-color: #E94E27;
 }
 
+
+.schedule th,
+.schedule td {
+    border: 1px solid #ccc;
+    padding: 15px; /* Increase padding for bigger cells */
+    text-align: center;
+    min-width: 100px; /* Minimum width for the cells */
+}

@@ -56,7 +56,7 @@ app.post("/admin/login", adminRoute.add)
 app.get("/admin/:username", adminRoute.show)
 app.post("/admin/create-user", adminRoute.createUser);
 app.get("/admin/waiters", adminRoute.listWaiters);
-app.post("/admin/delete-user/:username", adminRoute.deleteUser);
+app.post("/admin/delete-user", adminRoute.deleteUser);
 
 
 // Waiter-specific routes
@@ -67,8 +67,6 @@ app.get("/days", waiterRoute.showAvailableDays);
 
 // login
 app.post("/login", authRouter.login);
-
-
 
 
 const PORT = process.env.PORT || 3012;

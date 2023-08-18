@@ -1,0 +1,25 @@
+
+  <div class="waiter-container">
+    <h1>Welcome, {{username}}</h1>
+    <form action="/waiters/{{username}}" method="post">
+        <table>
+            <tr>
+                <th>Day</th>
+                <th>8-16</th>
+                <th>12-20</th>
+                <th>16-00</th>
+            </tr>
+            {{#each daysOfWeek}}
+            <tr>
+                <td>{{this.day}}</td>
+                <td><input type="checkbox" name="days[{{this.day}}][8-16]" value="8-16"></td>
+                <td><input type="checkbox" name="days[{{this.day}}][12-20]" value="12-20"></td>
+                <td><input type="checkbox" name="days[{{this.day}}][16-00]" value="16-00"></td>
+            </tr>
+            {{/each}}
+        </table>
+        <button type="submit">Save Shifts</button>
+    </form>
+</div>
+
+

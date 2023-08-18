@@ -24,7 +24,7 @@ app.set("view engine", "handlebars");
 app.set("views", "./views");
 app.use(express.static("public"));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
@@ -46,29 +46,22 @@ const waiter_service = waiterService(db);
 
 
 const homeRoute = home_route()
-const adminRoute = admin_route(admin_service, waiter_service)
+const adminRoute = admin_route(admin_service)
 const waiterRoute = waiter_route(waiter_service);
-const authRouter = authRoute(admin_service, waiter_service);
 
 
 app.get("/", homeRoute.show);
 app.post("/admin/login", adminRoute.add)
 app.get("/admin/:username", adminRoute.show)
-app.post("/admin/create-user", adminRoute.createUser);
+app.post("/admin/create-waiter", adminRoute.createUser);
 app.get("/admin/waiters", adminRoute.listWaiters);
-app.post("/admin/delete-user/:username", adminRoute.deleteUser);
+app.post("/admin/delete-waiter", adminRoute.deleteUser);
 
 
 // Waiter-specific routes
 app.get("/waiters/:username", waiterRoute.show);
 app.post("/waiters/:username", waiterRoute.updateDays);
 app.get("/days", waiterRoute.showAvailableDays);
-
-
-// login
-app.post("/login", authRouter.login);
-
-
 
 
 const PORT = process.env.PORT || 3012;

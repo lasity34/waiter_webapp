@@ -1,0 +1,26 @@
+<div class="schedule-container">
+  <h1>Select Your Shifts</h1>
+  <form action="/waiters/{{username}}" method="post">
+    <table class="schedule">
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>8-16</th>
+          <th>12-20</th>
+          <th>16-00</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each daysOfWeek}}
+          <tr>
+            <td>{{this.day}}</td>
+            <td><input type="checkbox" name="days[{{this.day}}][8-16]"></td>
+            <td><input type="checkbox" name="days[{{this.day}}][12-20]"></td>
+            <td><input type="checkbox" name="days[{{this.day}}][16-00]"></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    <button type="submit">Save</button>
+  </form>
+</div>

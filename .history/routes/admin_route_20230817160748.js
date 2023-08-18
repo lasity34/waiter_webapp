@@ -107,13 +107,8 @@ export default function admin_route(admin_service, waiter_service) {
     try {
       const { username } = req.body;
       const adminUsername = req.params.username;
-  
-      // Delete the user's shifts in the waiters_schedule table first
-      await admin_service.deleteWaiterSchedule(username);
-  
-      // Then delete the user
       const deleted = await admin_service.deleteUser(username);
-  
+
       if (deleted) {
         res.redirect(`/admin/${adminUsername}`);
       } else {
@@ -124,7 +119,6 @@ export default function admin_route(admin_service, waiter_service) {
       res.status(500).render("error", { message: "An error occurred" });
     }
   }
-  
 
   return {
     add,

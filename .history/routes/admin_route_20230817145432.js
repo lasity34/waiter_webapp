@@ -27,24 +27,9 @@ export default function admin_route(admin_service, waiter_service) {
   async function show(req, res) {
     const username = req.params.username;
     const waiters = await admin_service.listWaiters();
-    const availableDays = await waiter_service.getAvailableDays();
-  
-    // Constructing the schedule object
-    const schedule = {
-      'lunch': { 'mon': [], 'tue': [], 'wed': [], 'thu': [], 'fri': [], 'sat': [], 'sun': [] },
-      'supper': { 'mon': [], 'tue': [], 'wed': [], 'thu': [], 'fri': [], 'sat': [], 'sun': [] },
-    };
-  
-    availableDays.forEach((shift) => {
-      const time_slot_key = shift.time_slot === 'lunch' ? 'lunch' : 'supper';
-      const day_key = shift.day.slice(0, 3).toLowerCase();
-      schedule[time_slot_key][day_key] = shift.usernames.join(', ');
-    });
-  
-    res.render("admin", { username, waiters, schedule });
+    const shifts = await admin_service.getShifts()
+    res.render("admin", { username, waiters, shifts });
   }
-  
-  
 
   async function updateWaiter(req, res) {
     try {
@@ -107,13 +92,8 @@ export default function admin_route(admin_service, waiter_service) {
     try {
       const { username } = req.body;
       const adminUsername = req.params.username;
-  
-      // Delete the user's shifts in the waiters_schedule table first
-      await admin_service.deleteWaiterSchedule(username);
-  
-      // Then delete the user
       const deleted = await admin_service.deleteUser(username);
-  
+
       if (deleted) {
         res.redirect(`/admin/${adminUsername}`);
       } else {
@@ -124,7 +104,6 @@ export default function admin_route(admin_service, waiter_service) {
       res.status(500).render("error", { message: "An error occurred" });
     }
   }
-  
 
   return {
     add,

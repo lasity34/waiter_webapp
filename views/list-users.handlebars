@@ -1,0 +1,24 @@
+  <div class="users-list-column">
+    <h2>Users List</h2>
+    <table class="users-list">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each waiters}}
+          <tr>
+            <td>{{this.username}}</td>
+            <td>
+              <form action="/admin/delete-user/{{../username}}" method="post">
+                <input type="hidden" name="username" value="{{this.username}}">
+                <button type="submit" class="delete-button">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>

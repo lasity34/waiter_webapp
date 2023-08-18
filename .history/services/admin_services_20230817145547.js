@@ -66,10 +66,6 @@ export default function adminService(db) {
             return await db.any('SELECT day, time_slot, username FROM waiters_schedule');
           }
 
-          async function deleteWaiterSchedule(username) {
-            await db.none('DELETE FROM waiters_schedule WHERE username = $1', [username]);
-          }
-
 
 
         return {
@@ -79,8 +75,7 @@ export default function adminService(db) {
             createUser,
             listWaiters,
             deleteUser,
-            verifyCredentials,
-            deleteWaiterSchedule
+            verifyCredentials
         }
 
 

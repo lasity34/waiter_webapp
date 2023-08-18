@@ -79,8 +79,7 @@ export default function adminService(db) {
             createUser,
             listWaiters,
             deleteUser,
-            verifyCredentials,
-            deleteWaiterSchedule
+            verifyCredentials
         }
 
 
