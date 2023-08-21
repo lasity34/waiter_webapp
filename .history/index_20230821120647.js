@@ -28,20 +28,11 @@ app.set("view engine", "handlebars");
 app.set("views", "./views");
 app.use(express.static("public"));
 
-app.use(session({
-  secret: 'my-secret-key', // Replace with a secure secret key
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false } // Set to true if using HTTPS
-}));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
 dotenv.config();
-
-
 
 const connection = {
   connectionString: process.env.DATABASE_URL,

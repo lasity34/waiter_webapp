@@ -4,8 +4,9 @@ export default function create_user_route(admin_service) {
 
 
     async function showCreateUserPage(req, res) {
+        console.log('showCreateUserPage called'); // Add this line
         try {
-          res.render("created_user");
+          res.render("list-users");
         } catch (error) {
           console.error(error);
           res.status(500).render("error", { message: "An error occurred" });
@@ -22,7 +23,7 @@ export default function create_user_route(admin_service) {
           if (existingUser) {
             // If the user already exists, render the admin page with a message
             const waiters = await admin_service.listWaiters();
-            res.render("created_user", {
+            res.render("user", {
               username,
               waiters,
               message: "User with this username already exists",

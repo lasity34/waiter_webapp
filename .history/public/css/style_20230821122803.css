@@ -67,7 +67,6 @@ input {
 
 .schedule-container h2 {
   text-align: center;
-  font-size: 1.7rem;
 }
 
 .schedule {
@@ -106,7 +105,12 @@ input {
 }
 
 
-
+.admin-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 40px auto;
+  width: 80%;
+}
 
   
   .create-user-column,
@@ -130,21 +134,13 @@ input {
     text-align: center; /* Centered text */
   }
 
-  .admin-container {
-    display: flex;
-    justify-content: space-evenly;
-    margin: 40px auto;
-    width: 80%;
-  }
 
-
-  .admin-container button {
-    padding: 1em 2em;
-    font-size: 1.7rem;
+  .admin-button {
+    padding: 10px 20px;
+    font-size: 0.5rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
     border: none;
-    border-radius: 10px;
     background-color: #FF5733;
     color: white;
   }
@@ -177,7 +173,24 @@ input {
 
 /* admin user */
 /* Style for the navigation buttons in admin-container */
+.admin-container button {
+  padding: 12px;
+  background-color: #FF5733;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  display: block; /* Makes the button take up the full width of its container */
+  margin: 10px 0; /* Adds some margin around the buttons */
+}
 
+.admin-container button:hover {
+  background-color: #E94E27;
+}
 
 
 

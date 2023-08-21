@@ -3,15 +3,14 @@ export default function admin_route(admin_service, waiter_service) {
     try {
       const { username, password } = req.body;
       const admin = await admin_service.getAdminByUsername(username);
-  
+
       if (admin) {
         const isPasswordCorrect = await admin_service.verifyPassword(
           password,
           admin.password
         );
-  
+
         if (isPasswordCorrect) {
-          req.session.adminUsername = username; 
           res.redirect(`/admin/${username}`);
         } else {
           res.status(401).send("Invalid password");
@@ -24,7 +23,6 @@ export default function admin_route(admin_service, waiter_service) {
       res.status(500).send("An error occurred");
     }
   }
-  
 
   async function show(req, res) {
     const username = req.params.username;
@@ -70,7 +68,15 @@ export default function admin_route(admin_service, waiter_service) {
 
 
 
-
+  async function listWaiters(req, res) {
+    try {
+      const waiters = await admin_service.listWaiters();
+      res.render("waiters", { waiters });
+    } catch (error) {
+      console.error(error);
+      res.status(500).render("error", { message: "An error occurred" });
+    }
+  }
 
   async function deleteUser(req, res) {
     try {
@@ -99,6 +105,8 @@ export default function admin_route(admin_service, waiter_service) {
     add,
     show,
     updateWaiter,
+    createUser,
+    listWaiters,
     deleteUser,
   };
 }

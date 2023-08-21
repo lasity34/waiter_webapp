@@ -1,9 +1,5 @@
-<div>
-
-
-
 <div class="schedule-container">
-  <h2>📅 Waiters Schedule 📅</h2>
+  <h2>Waiters Schedule</h2>
   <div>
 
  
@@ -38,13 +34,16 @@
    </div>
 </div>
 <div class="admin-container">
-  <form action="/admin/create-user" method="get">
-    <button type="submit" class="admin-button">Create User</button>
-  </form>
+  <!-- Buttons to navigate to create user and list users pages -->
+<form action="/admin/create-user" method="get">
+       <button type="submit" class="admin-button">Create User</button>
+</form>
+
+  
+  <!-- Form for navigating to list users page -->
   <form action="/admin/list-users" method="get">
-    <button type="submit" class="admin-button">List Users</button>
+    <button type="submit">List Users</button>
   </form>
-</div>
 </div>
 
 <script>

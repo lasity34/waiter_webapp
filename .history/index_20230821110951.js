@@ -3,7 +3,6 @@ import { engine } from "express-handlebars";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import pgPromise from "pg-promise";
-import session from "express-session";
 
 import admin_route from "./routes/admin_route.js";
 import home_route from "./routes/home_route.js";
@@ -28,20 +27,11 @@ app.set("view engine", "handlebars");
 app.set("views", "./views");
 app.use(express.static("public"));
 
-app.use(session({
-  secret: 'my-secret-key', // Replace with a secure secret key
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false } // Set to true if using HTTPS
-}));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
 dotenv.config();
-
-
 
 const connection = {
   connectionString: process.env.DATABASE_URL,
@@ -71,7 +61,7 @@ app.post('/admin/create-user', createUserRoute.createUser)
 app.get('/admin/create-user',createUserRoute.showCreateUserPage);
 
 
-app.get('/admin/list-users', listUsers.listWaiters)
+app.get('/admin/list-users'.)
 
 
 app.get("/", homeRoute.show);

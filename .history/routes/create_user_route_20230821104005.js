@@ -22,7 +22,7 @@ export default function create_user_route(admin_service) {
           if (existingUser) {
             // If the user already exists, render the admin page with a message
             const waiters = await admin_service.listWaiters();
-            res.render("created_user", {
+            res.render("user", {
               username,
               waiters,
               message: "User with this username already exists",

@@ -36,8 +36,6 @@ input {
     font-size: 1rem;
 }
 
-/* login */
-
 .login-button {
     width: 100%;
     padding: 12px;
@@ -54,20 +52,14 @@ input {
     background-color: #E94E27;
 }
 
-/* admin */
 
 .schedule-container {
     width: 80%;
-    margin: 100px auto;
+    margin: 40px auto;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-}
-
-.schedule-container h2 {
-  text-align: center;
-  font-size: 1.7rem;
 }
 
 .schedule {
@@ -106,15 +98,39 @@ input {
 }
 
 
-
-
+.admin-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px auto;
+    width: 80%;
+  }
   
   .create-user-column,
   .users-list-column {
     width: 48%; /* Adjust the width as needed */
   }
   
- 
+  .users-list {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .users-list th,
+  .users-list td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .users-list th {
+    background-color: #FF5733;
+    color: white;
+  }
+  
+  .users-list tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
 
 
 
@@ -128,29 +144,6 @@ input {
     width: 100%; /* Full width */
     z-index: 1000; /* Place it on top */
     text-align: center; /* Centered text */
-  }
-
-  .admin-container {
-    display: flex;
-    justify-content: space-evenly;
-    margin: 40px auto;
-    width: 80%;
-  }
-
-
-  .admin-container button {
-    padding: 1em 2em;
-    font-size: 1.7rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    border: none;
-    border-radius: 10px;
-    background-color: #FF5733;
-    color: white;
-  }
-  
-  .admin-button:hover {
-    background-color: #E94E27;
   }
 
 
@@ -177,7 +170,24 @@ input {
 
 /* admin user */
 /* Style for the navigation buttons in admin-container */
+.admin-container button {
+  padding: 12px;
+  background-color: #FF5733;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  display: block; /* Makes the button take up the full width of its container */
+  margin: 10px 0; /* Adds some margin around the buttons */
+}
 
+.admin-container button:hover {
+  background-color: #E94E27;
+}
 
 
 
@@ -311,9 +321,4 @@ input {
 
 .users-list-column button[type="submit"]:hover {
   background-color: #E94E27;
-}
-
-
-.username {
-  font-size: 1.4rem;
 }

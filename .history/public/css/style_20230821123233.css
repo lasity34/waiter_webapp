@@ -67,7 +67,6 @@ input {
 
 .schedule-container h2 {
   text-align: center;
-  font-size: 1.7rem;
 }
 
 .schedule {
@@ -144,7 +143,6 @@ input {
     cursor: pointer;
     transition: background-color 0.3s ease;
     border: none;
-    border-radius: 10px;
     background-color: #FF5733;
     color: white;
   }

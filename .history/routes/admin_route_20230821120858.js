@@ -11,7 +11,7 @@ export default function admin_route(admin_service, waiter_service) {
         );
   
         if (isPasswordCorrect) {
-          req.session.adminUsername = username; 
+          req.session.adminUsername = username; // Store the username in the session
           res.redirect(`/admin/${username}`);
         } else {
           res.status(401).send("Invalid password");

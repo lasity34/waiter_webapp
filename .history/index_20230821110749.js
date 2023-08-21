@@ -3,14 +3,12 @@ import { engine } from "express-handlebars";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import pgPromise from "pg-promise";
-import session from "express-session";
 
 import admin_route from "./routes/admin_route.js";
 import home_route from "./routes/home_route.js";
 import waiter_route from "./routes/waiter_route.js";
 import authRoute from "./routes/auth_route.js";
 import create_user_route from "./routes/create_user_route.js";
-import list_users from "./routes/list_users.js";
 
 
 import adminService from "./services/admin_services.js";
@@ -28,20 +26,11 @@ app.set("view engine", "handlebars");
 app.set("views", "./views");
 app.use(express.static("public"));
 
-app.use(session({
-  secret: 'my-secret-key', // Replace with a secure secret key
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false } // Set to true if using HTTPS
-}));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
 dotenv.config();
-
-
 
 const connection = {
   connectionString: process.env.DATABASE_URL,
@@ -63,20 +52,18 @@ const adminRoute = admin_route(admin_service, waiter_service)
 const waiterRoute = waiter_route(waiter_service);
 const authRouter = authRoute(admin_service, waiter_service);
 const createUserRoute = create_user_route(admin_service)
-const listUsers = list_users(admin_service)
 
 
-// create-waiter
+
+
 app.post('/admin/create-user', createUserRoute.createUser)
 app.get('/admin/create-user',createUserRoute.showCreateUserPage);
-
-
-app.get('/admin/list-users', listUsers.listWaiters)
 
 
 app.get("/", homeRoute.show);
 app.post("/admin/login", adminRoute.add)
 app.get("/admin/:username", adminRoute.show)
+app.get("/admin/waiters", adminRoute.listWaiters);
 app.post("/admin/delete-user/:username", adminRoute.deleteUser);
 
 
