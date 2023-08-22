@@ -19,7 +19,7 @@ export default function create_user_route(admin_service) {
           let { username, password } = req.body;
 
 
-         
+          username = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase();
 
           const existingUser = await admin_service.getAdminByUsername(username);
     

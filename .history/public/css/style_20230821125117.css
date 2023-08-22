@@ -63,7 +63,6 @@ input {
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin-top: 20px;
 }
 
 .schedule-container h2 {
@@ -156,29 +155,22 @@ input {
 
 
   .logout-button {
-
-    padding: 5px 10px;
-    font-size: 1.3rem;
+    position: absolute; /* Position it absolutely within its parent container */
+    top: 10px; /* Offset from the top */
+    right: 10px; /* Offset from the right */
+    padding: 10px 20px;
+    font-size: 16px;
     cursor: pointer;
     border: none;
-    background-color: #6069ba; /* Example red color for the logout button */
+    background-color: #3649f4; /* Example red color for the logout button */
     color: white;
-    margin-right: 8em;
-    height: 50px;
-    align-self: center;
-    border-radius: 10px;
   }
   
   .logout-button:hover {
     background-color: #1308a9; /* Slightly darker red for hover effect */
   }
   
-  .logout_container {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    height: 20vh;
-  }
+
 
   /* waiter */
 

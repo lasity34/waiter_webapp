@@ -161,7 +161,7 @@ input {
     font-size: 1.3rem;
     cursor: pointer;
     border: none;
-    background-color: #6069ba; /* Example red color for the logout button */
+    background-color: #5563e4; /* Example red color for the logout button */
     color: white;
     margin-right: 8em;
     height: 50px;
@@ -176,7 +176,7 @@ input {
   .logout_container {
     display: flex;
     justify-content: right;
-    align-items: center;
+    align-content: center;
     height: 20vh;
   }
 

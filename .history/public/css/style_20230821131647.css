@@ -176,7 +176,7 @@ input {
   .logout_container {
     display: flex;
     justify-content: right;
-    align-items: center;
+    align-content: center;
     height: 20vh;
   }
 

@@ -19,7 +19,7 @@ export default function create_user_route(admin_service) {
           let { username, password } = req.body;
 
 
-         
+          username = username.toCapitalize();
 
           const existingUser = await admin_service.getAdminByUsername(username);
     

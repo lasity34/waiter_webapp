@@ -176,8 +176,8 @@ input {
   .logout_container {
     display: flex;
     justify-content: right;
-    align-items: center;
-    height: 20vh;
+    align-content: center;
+    height: 30vh;
   }
 
   /* waiter */
