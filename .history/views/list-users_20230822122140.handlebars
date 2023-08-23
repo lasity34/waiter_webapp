@@ -1,0 +1,69 @@
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="3;url={{redirectUrl}}">
+  <title>Redirecting...</title>
+</head>
+  <div class="users-list-column">
+    <h2>Waiter List</h2>
+    <table class="users-list">
+      <thead>
+        <tr>
+          <th>Waiter name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each waiters}}
+          <tr>
+            <td class="username">{{this.username}}</td>
+            <td>
+              <form action="/admin/delete-user/{{../username}}" method="post">
+                <input type="hidden" name="username" value="{{this.username}}">
+                <button type="submit" class="delete-button">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+<div id="notification-message" style="display: none;">
+  {{notification}}
+</div>
+
+    <form action="/admin/{{username}}" method="get">
+  <button type="submit">Back To admin</button>
+</form>
+
+  </div>
+  <script>
+ <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.delete-button').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const form = e.target.closest('form');
+        deleteUser(form);
+      });
+    });
+  });
+
+  function deleteUser(form) {
+    const confirmed = window.confirm('Are you sure you want to delete this user?');
+    if (confirmed) {
+      form.submit();
+
+      // Show notification
+      const messageDiv = document.getElementById('notification-message');
+      messageDiv.style.display = 'block';
+      messageDiv.innerText = 'Deleting user...';
+
+      // Redirect after 3 seconds
+      setTimeout(function() {
+        window.location.href = form.getAttribute('action').replace('/delete-user/', '/admin/');
+      }, 3000); // 3 seconds
+    }
+  }
+</script>
+
+
+</script>

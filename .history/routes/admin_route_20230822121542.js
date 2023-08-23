@@ -85,16 +85,20 @@ export default function admin_route(admin_service, waiter_service) {
   
       if (deleted) {
         req.session.notification = 'User deleted successfully';
-        res.redirect(`/admin/${adminUsername}`);
       } else {
         req.session.notification = 'Failed to delete user';
-        res.redirect(`/admin/${adminUsername}`);
       }
+  
+      // Render the same list users page with the notification
+      const waiters = await admin_service.listWaiters();
+      res.render("list-users", { waiters, username: adminUsername, notification: req.session.notification });
     } catch (error) {
       console.error(error);
       res.status(500).render("error", { message: "An error occurred" });
     }
   }
+  
+  
   
   
 

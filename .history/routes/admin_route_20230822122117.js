@@ -75,26 +75,22 @@ export default function admin_route(admin_service, waiter_service) {
   async function deleteUser(req, res) {
     try {
       const { username } = req.body;
-      const adminUsername = req.params.username;
   
       // Delete the user's shifts in the waiters_schedule table first
       await admin_service.deleteWaiterSchedule(username);
   
       // Then delete the user
-      const deleted = await admin_service.deleteUser(username);
+      await admin_service.deleteUser(username);
   
-      if (deleted) {
-        req.session.notification = 'User deleted successfully';
-        res.redirect(`/admin/${adminUsername}`);
-      } else {
-        req.session.notification = 'Failed to delete user';
-        res.redirect(`/admin/${adminUsername}`);
-      }
+      // You can send a success response here if needed, but it won't be used
+      res.status(200).send('User deleted');
     } catch (error) {
       console.error(error);
       res.status(500).render("error", { message: "An error occurred" });
     }
   }
+  
+  
   
   
 
