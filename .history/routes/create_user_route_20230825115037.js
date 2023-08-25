@@ -30,8 +30,8 @@ export default function create_user_route(admin_service) {
             });
           } else {
             const newUser = await admin_service.createUser(username, password);
-            req.session.notification = "User Successfully created"
             res.redirect(`/admin/${username}`);
+            req.session.notification = "User Successfully created"
 
           }
         }catch (error) {

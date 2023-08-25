@@ -347,21 +347,17 @@ input {
 /* notification */
 
 
-#notification-message {
+.notification-message {
   background-color: #f44336; /* Red background */
   color: white; /* White text color */
   padding: 16px; /* Padding around the text */
   position: fixed; /* Fixed position */
   z-index: 1000; /* Position above other elements */
-  top: 20px; /* Distance from the top */
-  bottom: auto; /* Override the bottom property */
-   left: 50%; /* Center horizontally */
-  bottom: 200px; /* Distance from the top */
+  left: 50%; /* Center horizontally */
+  top: 50px; /* Distance from the top */
   transform: translateX(-50%); /* Centering adjustment */
   max-width: 300px; /* Maximum width */
   text-align: center; /* Center the text inside */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0px 0px 10px rgba(0,0,0,0.2); /* Shadow for depth */
-  font-size: 1.1rem;
-  height: 20px;
 }

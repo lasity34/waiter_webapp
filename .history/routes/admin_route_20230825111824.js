@@ -76,7 +76,7 @@ export default function admin_route(admin_service, waiter_service) {
   
 
   return {
-  
+    add,
     show,
     updateWaiter,
     deleteUser,

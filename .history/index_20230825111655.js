@@ -75,6 +75,9 @@ app.get('/admin/list-users', listUsers.listWaiters)
 
 
 app.get("/", homeRoute.show);
+app.post("/admin/login", (req, res) => {
+  adminRoute.add(req, res);
+});
 app.get("/admin/:username", adminRoute.show)
 app.post("/admin/delete-user/:username", adminRoute.deleteUser);
 

@@ -18,6 +18,9 @@ export default function create_user_route(admin_service) {
         try {
           let { username, password } = req.body;
 
+
+         
+
           const existingUser = await admin_service.getAdminByUsername(username);
     
           if (existingUser) {
@@ -30,21 +33,15 @@ export default function create_user_route(admin_service) {
             });
           } else {
             const newUser = await admin_service.createUser(username, password);
-            req.session.notification = "User Successfully created"
             res.redirect(`/admin/${username}`);
-
           }
-        }catch (error) {
-          if (error.message === 'User with this username already exists') {
-            // Handle this specific error
-            res.render("created_user", {
-              notification: error.message,
-            });
-          } else {
-            // Handle other errors
-            console.error(error);
-            res.status(500).render("error", { message: "An error occurred" });
-          }
+        } catch (error) {
+          console.error(error);
+          const waiters = await admin_service.listWaiters();
+          res.render("admin", {
+            message: "User with this username already exists",
+            waiters,
+          });
         }
       }
 

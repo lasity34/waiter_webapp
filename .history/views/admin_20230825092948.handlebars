@@ -5,8 +5,9 @@
     <button class="logout-button">Logout</button>
     </form>
   </div>
-
-
+{{#if notification}}
+  <div class="notification">{{notification}}</div>
+{{/if}}
   <div class="schedule-container">
     <h2>📅 Waiters Schedule 📅</h2>
     <div>
@@ -50,9 +51,7 @@
     </form>
   </div>
 </div>
-<div id="notification-message" class="notification-message" style="display: {{#if notification}}block{{else}}none{{/if}};">
-  {{notification}}
-</div>
+
 <script>
   setTimeout(function() { var messageDiv =
   document.getElementById('notification-message'); if (messageDiv) {

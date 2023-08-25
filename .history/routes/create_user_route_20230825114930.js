@@ -30,9 +30,8 @@ export default function create_user_route(admin_service) {
             });
           } else {
             const newUser = await admin_service.createUser(username, password);
-            req.session.notification = "User Successfully created"
             res.redirect(`/admin/${username}`);
-
+            
           }
         }catch (error) {
           if (error.message === 'User with this username already exists') {

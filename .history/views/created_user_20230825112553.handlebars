@@ -1,7 +1,4 @@
 
-  <div id="notification-message" style="display: {{#if notification}}block{{else}}none{{/if}};">
-  {{notification}}
-</div>
 <div class="user-form">
   <h2>Create User</h2>
   <form action="/admin/create-user" method="post">
@@ -11,10 +8,8 @@
     <input type="password" id="password" name="password" required>
     <input type="submit" value="Create">
   </form>
+  <div id="notification-message" style="display: {{#if notification}}block{{else}}none{{/if}};">
+  {{notification}}
+</div>
 
 </div>
-<script>
-  setTimeout(function() { var messageDiv =
-  document.getElementById('notification-message'); if (messageDiv) {
-  messageDiv.style.display = 'none'; } }, 3000); // 3 seconds
-</script>
