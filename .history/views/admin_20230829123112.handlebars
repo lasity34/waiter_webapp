@@ -46,24 +46,24 @@
         </tr>
         <tr>
           <td>Supper</td>
-         {{#each schedule.supper as |value key| }}
-  <td>
-    <div class="shift-cell waiter-row">
-      {{#each value}}
-        <span class="waiter-name">
-          {{this}}
-          <form class="remove-waiter-form" method="post" action="/admin/remove-waiter">
-            <input type="hidden" name="day" value="{{key}}">
-            <input type="hidden" name="shift" value="supper">
-            <input type="hidden" name="waiter" value="{{this}}">
-            <button type="submit" class="remove-waiter" onclick="return confirm('Are you sure you want to remove this waiter?');">Remove</button>
-          </form>
-        </span>
-        <br>
-      {{/each}}
-    </div>
-  </td>
-{{/each}}
+          {{#each schedule.supper}}
+            <td>
+              <div class="shift-cell waiter-row">
+                {{#each this}}
+                  <span class="waiter-name">
+                    {{this}}
+                    <form class="remove-waiter-form" method="post" action="/admin/remove-waiter">
+                      <input type="hidden" name="day" value="Monday">
+                      <input type="hidden" name="shift" value="supper">
+                      <input type="hidden" name="waiter" value="{{this}}">
+                      <button type="submit" class="remove-waiter">Remove</button>
+                    </form>
+                  </span>
+                  <br>
+                {{/each}}
+              </div>
+            </td>
+          {{/each}}
         </tr>
       </tbody>
     </table>

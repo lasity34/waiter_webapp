@@ -402,9 +402,5 @@ input {
 
 /* create button */
 #create_button {
-  background-color: rgb(116, 151, 64);
-}
-
-#list_button {
-  background-color: rgb(213, 213, 93);
+  background-color: greenyellow;
 }

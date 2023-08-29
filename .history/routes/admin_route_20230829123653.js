@@ -77,8 +77,10 @@ export default function admin_route(admin_service, waiter_service) {
     const { day, shift, waiter } = req.body;
     const adminUsername = req.params.username;
     try {
+      // Logic to remove the waiter from the specific day and shift
+      console.log("Calling removeWaiterFromShift");
       await waiter_service.removeWaiterFromShift(waiter, day, shift);
-
+      console.log("Called removeWaiterFromShift");
       res.redirect(`/admin/${adminUsername}`); // Redirect back to the admin page
     } catch (error) {
       console.error(error);
