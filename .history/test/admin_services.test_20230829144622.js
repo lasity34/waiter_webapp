@@ -14,8 +14,6 @@ const pgp = pgPromise();
 
 const db = pgp(connectionOptions);
 
-const saltRounds = 10;
-
 describe("Admin Services", function () {
   this.timeout(5000);
 
@@ -52,11 +50,12 @@ describe("Admin Services", function () {
   it("should test if password verification fails for incorrect password", async function () {
     const saltRounds = 10;
     const correctPassword = "bjorn123";
-    const incorrectPassword = "wrong_password"; 
-    const salt = bcrypt.genSaltSync(saltRounds);
-    const hash = bcrypt.hashSync(correctPassword, salt);  
+    const incorrectPassword = "wrong_password";  // This is the wrong password
     
-    const isValid = await admin.verifyPassword(incorrectPassword, hash);
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(correctPassword, salt);  // Hashing the correct password
+    
+    const isValid = await admin.verifyPassword(incorrectPassword, hash);  // Using the wrong password for verification
     
     assert.strictEqual(isValid, false);
   });

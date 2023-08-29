@@ -14,8 +14,6 @@ const pgp = pgPromise();
 
 const db = pgp(connectionOptions);
 
-const saltRounds = 10;
-
 describe("Admin Services", function () {
   this.timeout(5000);
 
@@ -52,11 +50,12 @@ describe("Admin Services", function () {
   it("should test if password verification fails for incorrect password", async function () {
     const saltRounds = 10;
     const correctPassword = "bjorn123";
-    const incorrectPassword = "wrong_password"; 
-    const salt = bcrypt.genSaltSync(saltRounds);
-    const hash = bcrypt.hashSync(correctPassword, salt);  
+    const incorrectPassword = "wrong_password";  // This is the wrong password
     
-    const isValid = await admin.verifyPassword(incorrectPassword, hash);
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(correctPassword, salt);  // Hashing the correct password
+    
+    const isValid = await admin.verifyPassword(incorrectPassword, hash);  // Using the wrong password for verification
     
     assert.strictEqual(isValid, false);
   });
@@ -66,22 +65,20 @@ describe("Admin Services", function () {
     const newPassword = "bjorn1989";
     const newHash = bcrypt.hashSync(newPassword, saltRounds);
     
-    // Insert a new admin into the database
-    await db.none("INSERT INTO public.admins (username, password) VALUES ('bjorn', 'some_hash')");
+    await db.none("INSERT INTO public.admins (username, password) VALUES ('some_username', 'some_hash')");
     
-    // Update the password using the new function
-    await admin.updatePassword('bjorn', newHash);
-    const updatedAdmin = await admin.getAdminByUsername('bjorn');
+    // Assuming you have a method like updatePassword in admin_services.js
+    await admin.updatePassword('some_username', newHash);
+    const updatedAdmin = await admin.getAdminByUsername('some_username');
     
     const isValid = await admin.verifyPassword(newPassword, updatedAdmin.password);
     assert.strictEqual(isValid, true);
   });
 
   it("should test if admin can be deleted", async function () {
-    // Insert a new admin into the database
     await db.none("INSERT INTO public.admins (username, password) VALUES ('some_username', 'some_hash')");
     
-    // Delete the admin using the new function
+    // Assuming you have a method like deleteAdmin in admin_services.js
     await admin.deleteAdmin('some_username');
     const deletedAdmin = await admin.getAdminByUsername('some_username');
     

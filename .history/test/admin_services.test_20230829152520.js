@@ -69,13 +69,21 @@ describe("Admin Services", function () {
     // Insert a new admin into the database
     await db.none("INSERT INTO public.admins (username, password) VALUES ('bjorn', 'some_hash')");
     
+    // Debugging Line: Check the admin before the update
+    const beforeUpdate = await admin.getAdminByUsername('bjorn');
+    console.log("Before Update: ", beforeUpdate);
+    
     // Update the password using the new function
     await admin.updatePassword('bjorn', newHash);
-    const updatedAdmin = await admin.getAdminByUsername('bjorn');
     
-    const isValid = await admin.verifyPassword(newPassword, updatedAdmin.password);
+ 
+    const afterUpdate = await admin.getAdminByUsername('bjorn');
+    console.log("After Update: ", afterUpdate);
+    
+    const isValid = await admin.verifyPassword(newPassword, afterUpdate.password);
     assert.strictEqual(isValid, true);
   });
+  
 
   it("should test if admin can be deleted", async function () {
     // Insert a new admin into the database
