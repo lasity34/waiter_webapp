@@ -85,15 +85,6 @@ export default function adminService(db) {
           }
         }
         
-        async function deleteAdmin(username) {
-          try {
-            await db.none('DELETE FROM public.admins WHERE username = $1', [username]);
-            return { success: true, message: 'Admin deleted successfully.' };
-          } catch (error) {
-            return { success: false, message: error.message };
-          }
-        }
-        
 
 
 
@@ -106,9 +97,7 @@ export default function adminService(db) {
             deleteUser,
             verifyCredentials,
             deleteWaiterSchedule,
-            insertAdmin,
-            updatePassword,
-            deleteAdmin
+            insertAdmin
         }
 
 

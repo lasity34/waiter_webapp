@@ -108,7 +108,7 @@ export default function adminService(db) {
             deleteWaiterSchedule,
             insertAdmin,
             updatePassword,
-            deleteAdmin
+
         }
 
 

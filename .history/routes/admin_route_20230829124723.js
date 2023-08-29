@@ -30,11 +30,10 @@ export default function admin_route(admin_service, waiter_service) {
     
 
     availableDays.forEach((shift) => {
-      const time_slot_key = shift.time_slot.toLowerCase(); // make sure this becomes 'lunch' or 'supper'
-      const day_key = shift.day; // make sure the case matches, like 'Monday'
+      const time_slot_key = shift.time_slot === "lunch" ? "lunch" : "supper";
+      const day_key = shift.day.slice(0, 3).toLowerCase();
       schedule[time_slot_key][day_key] = shift.usernames;
     });
-    
 
     const notification = req.session.notification;
     res.render("admin", {
@@ -115,8 +114,6 @@ export default function admin_route(admin_service, waiter_service) {
       res.status(500).send("An error occurred");
     }
   }
-
-
 
   return {
     show,

@@ -116,6 +116,9 @@ export default function admin_route(admin_service, waiter_service) {
     }
   }
 
+  async function insertAdmin(username, passwordHash) {
+    return await db.none('INSERT INTO public.admins (username, password) VALUES ($1, $2)', [username, passwordHash]);
+}
 
 
   return {

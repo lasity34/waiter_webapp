@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 export default function adminService(db) {
     
         async function getAdminByUsername(username) {
-            return await db.oneOrNone('SELECT * FROM public.admins WHERE username = $1', [username])
+            return await db.oneOrNone('SELECT * FROM waiters_schedule.admins WHERE username = $1', [username])
         }
 
 
@@ -76,24 +76,6 @@ export default function adminService(db) {
             return await db.none('INSERT INTO public.admins (username, password) VALUES ($1, $2)', [username, passwordHash]);
         }
         
-        async function updatePassword(username, newPasswordHash) {
-          try {
-            await db.none('UPDATE public.admins SET password = $2 WHERE username = $1', [username, newPasswordHash]);
-            return { success: true, message: 'Password updated successfully.' };
-          } catch (error) {
-            return { success: false, message: error.message };
-          }
-        }
-        
-        async function deleteAdmin(username) {
-          try {
-            await db.none('DELETE FROM public.admins WHERE username = $1', [username]);
-            return { success: true, message: 'Admin deleted successfully.' };
-          } catch (error) {
-            return { success: false, message: error.message };
-          }
-        }
-        
 
 
 
@@ -106,9 +88,7 @@ export default function adminService(db) {
             deleteUser,
             verifyCredentials,
             deleteWaiterSchedule,
-            insertAdmin,
-            updatePassword,
-            deleteAdmin
+            insertAdmin
         }
 
 
