@@ -8,7 +8,6 @@ export default function waiter_route(waiter_service) {
       await waiter_service.saveSelectedDays(username, selectedDays);
       req.session.notification = "Waiter days added"; 
       res.redirect(`/waiters/${username}`);
-   
     } catch (error) {
       console.error("Error while saving selected days:", error); // Debugging log for error
       res.redirect(`/waiters/${username}`);
@@ -29,7 +28,6 @@ export default function waiter_route(waiter_service) {
       const schedule = await waiter_service.getWaiterSchedule(username);
       // Pass the daysOfWeek and timeSlots arrays to the template, along with username and schedule
       const notification = req.session.notification;
-      req.session.notification = null
       res.render('waiters', { username, daysOfWeek, timeSlots, schedule, notification});
     } catch (error) {
       console.error(error);

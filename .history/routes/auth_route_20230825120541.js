@@ -6,9 +6,8 @@ export default function authRoute(adminService, waiterService) {
     const admin = await adminService.verifyCredentials(username, password);
     if (admin) {
       req.session.adminUsername = username;
-      console.log(req.session.adminUsername)
-      return res.redirect(`/admin/${username}`);
       
+      return res.redirect(`/admin/${username}`);
     }
 
     // Verify credentials in the waiters table
@@ -18,7 +17,7 @@ export default function authRoute(adminService, waiterService) {
     }
 
     // Render the login page with an error message if credentials are not valid
-    const notification = "Invalid credentials"
+    const notification = "Invalid username"
     res.render('login', { notification });
   }
 

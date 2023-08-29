@@ -1,20 +1,4 @@
 export default function waiter_route(waiter_service) {
-
-  async function updateDays(req, res) {
-    const username = req.params.username;
-    const selectedDays = req.body.days;
- 
-    try {
-      await waiter_service.saveSelectedDays(username, selectedDays);
-      req.session.notification = "Waiter days added"; 
-      res.redirect(`/waiters/${username}`);
-   
-    } catch (error) {
-      console.error("Error while saving selected days:", error); // Debugging log for error
-      res.redirect(`/waiters/${username}`);
-    }
-  }
-  
   
   async function show(req, res) {
     const username = req.params.username;
@@ -28,9 +12,8 @@ export default function waiter_route(waiter_service) {
     try {
       const schedule = await waiter_service.getWaiterSchedule(username);
       // Pass the daysOfWeek and timeSlots arrays to the template, along with username and schedule
-      const notification = req.session.notification;
-      req.session.notification = null
-      res.render('waiters', { username, daysOfWeek, timeSlots, schedule, notification});
+      const notification = "Waiter days added"
+      res.render('waiters', { username, daysOfWeek, timeSlots, schedule, notification });
     } catch (error) {
       console.error(error);
       res.redirect('/');
@@ -39,7 +22,21 @@ export default function waiter_route(waiter_service) {
   
   
   
-
+  async function updateDays(req, res) {
+    const username = req.params.username;
+    const selectedDays = req.body.days;
+    console.log("Complete request body:", req.body);
+    console.log("Selected days from request:", selectedDays); // Debugging log
+    console.log("Username:", username); // Debugging log
+    try {
+      await waiter_service.saveSelectedDays(username, selectedDays);
+      res.redirect(`/waiters/${username}`);
+    } catch (error) {
+      console.error("Error while saving selected days:", error); // Debugging log for error
+      res.redirect(`/waiters/${username}`);
+    }
+  }
+  
     async function showAvailableDays(req, res) {
       try {
         const availableDays = await waiter_service.getAvailableDays();

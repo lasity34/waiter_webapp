@@ -353,7 +353,7 @@ input {
   padding: 16px; /* Padding around the text */
   position: fixed; /* Fixed position */
   z-index: 1000; /* Position above other elements */
-  top: 70%; /* Distance from the top */
+  top: 50%; /* Distance from the top */
   bottom: auto; /* Override the bottom property */
    left: 50%; /* Center horizontally */
   bottom: 200px; /* Distance from the top */

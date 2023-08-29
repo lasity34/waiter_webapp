@@ -4,7 +4,6 @@ import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import pgPromise from "pg-promise";
 import session from "express-session";
-import Handlebars from "handlebars";
 
 import admin_route from "./routes/admin_route.js";
 import home_route from "./routes/home_route.js";
