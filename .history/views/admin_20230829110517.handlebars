@@ -1,0 +1,89 @@
+<div>
+  <div class="logout_container">
+    <form action="/" method="get">
+      <button class="logout-button">Logout</button>
+    </form>
+  </div>
+
+  <div class="schedule-container">
+    <h2>📅 Waiters Schedule 📅</h2>
+    <div>
+      <table class="schedule">
+        <thead>
+          <tr>
+            <th>Shift</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+            <th>Sunday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lunch</td>
+            {{#each schedule.lunch}}
+              <td><div class="shift-cell waiter-row">{{printUsernames this}}</div></td>
+            {{/each}}
+          </tr>
+          <tr>
+            <td>Supper</td>
+            {{#each schedule.supper}}
+              <td><div class="shift-cell waiter-row">{{printUsernames this}}</div></td>
+            {{/each}}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="admin-container">
+    <form action="/admin/create-user" method="get">
+      <button type="submit" class="admin-button">Create User</button>
+    </form>
+    <form action="/admin/list-users" method="get">
+      <button type="submit" class="admin-button">List Users</button>
+    </form>
+  </div>
+</div>
+
+<div id="notification-message" class="notification-message" style="display: {{#if notification}}block{{else}}none{{/if}};">
+  {{notification}}
+</div>
+
+<script>
+  setTimeout(function() {
+    var messageDiv = document.getElementById('notification-message');
+    if (messageDiv) {
+      messageDiv.style.display = 'none';
+    }
+  }, 3000);
+
+  // New script to handle background color
+
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('Script is running'); // Debug log
+    const shiftCells = document.querySelectorAll('.shift-cell');
+
+    shiftCells.forEach(cell => {
+      const waiterText = cell.textContent || cell.innerText;
+      const waiters = waiterText.split(',');
+      const waiterCount = waiters[0] ? waiters.length : 0;
+
+      console.log('Waiter Count:', waiterCount); // Debug log
+
+      if (waiterCount < 3) {
+        cell.style.backgroundColor = 'red';
+      } else if (waiterCount === 3) {
+        cell.style.backgroundColor = 'green';
+      } else {
+        cell.style.backgroundColor = 'yellow';
+      }
+    });
+  });
+
+
+
+</script>

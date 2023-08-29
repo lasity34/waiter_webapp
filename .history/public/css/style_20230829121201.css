@@ -386,15 +386,3 @@ input {
 .remove-waiter:hover {
   background-color: #9e34ac; /* Darker red on hover */
 }
-
-/* reset button */
-
-.reset-schedule {
-  background-color: #FF0000;  /* Red background */
-  color: white;  /* White text */
-  /* ... other styles ... */
-}
-
-.reset-schedule:hover {
-  background-color: #CC0000; /* Darker red on hover */
-}

@@ -28,11 +28,11 @@ app.engine(
 
 
 Handlebars.registerHelper('generateWaiterSpans', function(waiterList) {
-  let divs = '';
+  let spans = '';
   waiterList.forEach(waiter => {
-    divs += `<div class="waiter-name">${waiter}</div>`;
+    spans += `<span class="waiter-name">${waiter}</span><br>`;
   });
-  return new Handlebars.SafeString(divs);
+  return new Handlebars.SafeString(spans);
 });
 
 app.set("view engine", "handlebars");
@@ -94,8 +94,7 @@ app.post("/admin/delete-user/:username", adminRoute.deleteUser);
 app.get("/waiters/:username", waiterRoute.show);
 app.post("/waiters/:username", waiterRoute.updateDays);
 app.get("/days", waiterRoute.showAvailableDays);
-app.post('/admin/remove-waiter', adminRoute.removeWaiter);
-app.post('/admin/reset-schedule', adminRoute.resetSchedule);
+
 
 // login
 app.post("/login", authRouter.login);

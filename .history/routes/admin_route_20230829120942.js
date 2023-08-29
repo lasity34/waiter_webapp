@@ -89,18 +89,6 @@ export default function admin_route(admin_service, waiter_service) {
       res.status(500).send("An error occurred");
     }
   }
-
-  async function resetSchedule(req, res) {
-    try {
-      await waiter_service.resetAllShifts();  // Assuming you will create this function in waiter_service
-      req.session.notification = 'Schedule reset successfully';
-      res.redirect('/admin');  // Redirect back to the admin page
-    } catch (error) {
-      console.error(error);
-      res.status(500).send("An error occurred");
-    }
-  }
-  
   
   
 
@@ -109,7 +97,6 @@ export default function admin_route(admin_service, waiter_service) {
     show,
     updateWaiter,
     deleteUser,
-    removeWaiter,
-    resetSchedule
+    removeWaiter
   };
 }

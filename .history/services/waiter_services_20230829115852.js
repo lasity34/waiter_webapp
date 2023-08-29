@@ -55,19 +55,13 @@ export default function waiterService(db) {
   async function removeWaiterFromShift(username, day, time_slot) {
     return await db.none('DELETE FROM waiters_schedule WHERE username = $1 AND day = $2 AND time_slot = $3', [username, day, time_slot]);
   }
-
-  async function resetAllShifts() {
-    return await db.none('DELETE FROM waiters_schedule');
-  }
-  
   
   return {
     getWaiterSchedule,
     saveSelectedDays,
     getAvailableDays,
     verifyCredentials,
-    removeWaiterFromShift,
-    resetAllShifts
+    removeWaiterFromShift
   };
 }
 

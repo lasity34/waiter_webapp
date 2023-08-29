@@ -95,7 +95,6 @@ app.get("/waiters/:username", waiterRoute.show);
 app.post("/waiters/:username", waiterRoute.updateDays);
 app.get("/days", waiterRoute.showAvailableDays);
 app.post('/admin/remove-waiter', adminRoute.removeWaiter);
-app.post('/admin/reset-schedule', adminRoute.resetSchedule);
 
 // login
 app.post("/login", authRouter.login);
