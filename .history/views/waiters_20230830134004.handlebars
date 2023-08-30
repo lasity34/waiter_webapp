@@ -28,8 +28,7 @@
                 <input type="checkbox" 
                   id="days-{{this}}-{{../this}}" 
                   name="days[{{this}}][{{../this}}]" 
-               {{#if (isDayChecked this ../this ../../checkedDays)}}checked{{/if}}
-
+                  {{#if (isDayChecked this ../this checkedDays)}}checked{{/if}}>
 
                 <label class="custom-checkbox" for="days-{{this}}-{{../this}}"></label>
               </td>

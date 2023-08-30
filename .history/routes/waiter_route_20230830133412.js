@@ -9,7 +9,6 @@ export default function waiter_route(waiter_service) {
       const checkedDays = await waiter_service.getSelectedDays(username);
       req.session.checkedDays = checkedDays;
       req.session.notification = "Waiter days added"; 
-    
       res.redirect(`/waiters/${username}`);
    
     } catch (error) {
@@ -40,7 +39,7 @@ export default function waiter_route(waiter_service) {
           })
         };
       });
-   
+      console.log("Checked Days in show: ", checkedDays);
       res.render('waiters', { username, daysOfWeek, timeSlots, scheduleData, notification, checkedDays });
 
       

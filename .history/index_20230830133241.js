@@ -37,11 +37,12 @@ Handlebars.registerHelper('generateWaiterSpans', function(waiterList) {
 
 
 Handlebars.registerHelper('isDayChecked', function(day, timeSlot, checkedDays) {
-  console.log("Inside isDayChecked, checkedDays:", checkedDays);  // Debug log
+  console.log("Day: ", day);
+  console.log("TimeSlot: ", timeSlot);
+  console.log("Checked Days: ", checkedDays);
   const dayTimeKey = `${day}-${timeSlot}`;
   return checkedDays && checkedDays.includes(dayTimeKey);
 });
-
 
 
 app.set("view engine", "handlebars");

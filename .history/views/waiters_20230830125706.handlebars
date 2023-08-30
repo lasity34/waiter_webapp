@@ -26,11 +26,9 @@
             {{#each ../daysOfWeek}}
               <td>
                 <input type="checkbox" 
-                  id="days-{{this}}-{{../this}}" 
-                  name="days[{{this}}][{{../this}}]" 
-               {{#if (isDayChecked this ../this ../../checkedDays)}}checked{{/if}}
-
-
+                       id="days-{{this}}-{{../this}}" 
+                       name="days[{{this}}][{{../this}}]" 
+                       {{#if (isDayChecked this ../this scheduleData)}}checked{{/if}}>
                 <label class="custom-checkbox" for="days-{{this}}-{{../this}}"></label>
               </td>
             {{/each}}
@@ -42,7 +40,6 @@
   </form>
 </div>
 
-{{log checkedDays}}
 
 
 </div>

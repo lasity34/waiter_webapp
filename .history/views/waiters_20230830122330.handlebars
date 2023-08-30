@@ -20,31 +20,26 @@
         </tr>
       </thead>
       <tbody>
-        {{#each timeSlots}}
-          <tr>
-            <td>{{this}}</td>
-            {{#each ../daysOfWeek}}
-              <td>
-                <input type="checkbox" 
-                  id="days-{{this}}-{{../this}}" 
-                  name="days[{{this}}][{{../this}}]" 
-               {{#if (isDayChecked this ../this ../../checkedDays)}}checked{{/if}}
+       {{#each timeSlots}}
+  <tr>
+    <td>{{this}}</td>
+    {{#each ../daysOfWeek}}
+    <td>
+      <input type="checkbox" 
+             id="days-{{this}}-{{../this}}" 
+             name="days[{{this}}][{{../this}}]" 
+             {{isDayChecked this ../this checkedDays}}>
+      <label class="custom-checkbox" for="days-{{this}}-{{../this}}"></label>
+    </td>
+    {{/each}}
+  </tr>
+{{/each}}
 
-
-                <label class="custom-checkbox" for="days-{{this}}-{{../this}}"></label>
-              </td>
-            {{/each}}
-          </tr>
-        {{/each}}
       </tbody>
     </table>
     <button class="login-button" type="submit">Save</button>
   </form>
 </div>
-
-{{log checkedDays}}
-
-
 </div>
  <div id="notification-message" class="notification-message" style="display: {{#if notification}}block{{else}}none{{/if}};">
   {{notification}}
@@ -53,7 +48,5 @@
 <script>
   setTimeout(function() { var messageDiv =
   document.getElementById('notification-message'); if (messageDiv) {
-  messageDiv.style.display = 'none'; } }, 3000); 
-
-
+  messageDiv.style.display = 'none'; } }, 3000); // 3 seconds
 </script>

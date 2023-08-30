@@ -20,30 +20,25 @@
         </tr>
       </thead>
       <tbody>
-        {{#each timeSlots}}
-          <tr>
-            <td>{{this}}</td>
-            {{#each ../daysOfWeek}}
-              <td>
-                <input type="checkbox" 
-                  id="days-{{this}}-{{../this}}" 
-                  name="days[{{this}}][{{../this}}]" 
-               {{#if (isDayChecked this ../this ../../checkedDays)}}checked{{/if}}
-
-
-                <label class="custom-checkbox" for="days-{{this}}-{{../this}}"></label>
-              </td>
-            {{/each}}
-          </tr>
-        {{/each}}
+    {{#each timeSlots}}
+  <tr>
+    <td>{{this}}</td>
+    {{#each ../daysOfWeek}}
+      <td>
+        <input type="checkbox" 
+               id="days-{{this}}-{{../../timeSlots}}" 
+               name="days[{{this}}][{{../../timeSlots}}]" 
+               {{isDayChecked this ../../timeSlots ../checkedDays}}>
+        <label class="custom-checkbox" for="days-{{this}}-{{../../timeSlots}}"></label>
+      </td>
+    {{/each}}
+  </tr>
+{{/each}}
       </tbody>
     </table>
     <button class="login-button" type="submit">Save</button>
   </form>
 </div>
-
-{{log checkedDays}}
-
 
 </div>
  <div id="notification-message" class="notification-message" style="display: {{#if notification}}block{{else}}none{{/if}};">

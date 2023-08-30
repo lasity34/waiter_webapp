@@ -14,24 +14,22 @@
       <thead>
         <tr>
           <th>Time Slot</th>
-          {{#each daysOfWeek}}
-            <th>{{this}}</th>
+          {{#each scheduleData}}
+            <th>{{timeSlot}}</th>
           {{/each}}
         </tr>
       </thead>
       <tbody>
-        {{#each timeSlots}}
+        {{#each scheduleData}}
           <tr>
-            <td>{{this}}</td>
-            {{#each ../daysOfWeek}}
+            <td>{{timeSlot}}</td>
+            {{#each days}}
               <td>
                 <input type="checkbox" 
-                  id="days-{{this}}-{{../this}}" 
-                  name="days[{{this}}][{{../this}}]" 
-               {{#if (isDayChecked this ../this ../../checkedDays)}}checked{{/if}}
-
-
-                <label class="custom-checkbox" for="days-{{this}}-{{../this}}"></label>
+                       id="days-{{day}}-{{../timeSlot}}" 
+                       name="days[{{day}}][{{../timeSlot}}]" 
+                       {{#if isChecked}}checked{{/if}}>
+                <label class="custom-checkbox" for="days-{{day}}-{{../timeSlot}}"></label>
               </td>
             {{/each}}
           </tr>
@@ -41,8 +39,6 @@
     <button class="login-button" type="submit">Save</button>
   </form>
 </div>
-
-{{log checkedDays}}
 
 
 </div>
