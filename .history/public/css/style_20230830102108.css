@@ -428,5 +428,9 @@ input {
 
 /* checkbox */
 .schedule input[type="checkbox"] {
-  transform: scale(1.5); /* Makes it 1.5 times bigger */
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }

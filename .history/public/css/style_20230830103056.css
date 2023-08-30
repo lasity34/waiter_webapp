@@ -428,5 +428,38 @@ input {
 
 /* checkbox */
 .schedule input[type="checkbox"] {
-  transform: scale(1.5); /* Makes it 1.5 times bigger */
+  opacity: 0;  /* Hide the checkbox */
+  position: absolute;
+  cursor: pointer;  /* Show pointer cursor */
+  width: 100%;
+  height: 100%;
 }
+
+.schedule label.custom-checkbox {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;  /* Show pointer cursor */
+  z-index: 1;
+}
+
+.schedule label.custom-checkbox::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  text-align: center;
+  line-height: 100%;
+}
+
+.schedule input[type="checkbox"]:checked + label.custom-checkbox::before {
+  content: "X";
+  font-size: 24px;
+  text-align: center;
+  line-height: 100%;
+}
+

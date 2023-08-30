@@ -8,6 +8,10 @@ export default function admin_route(admin_service, waiter_service) {
     const waiters = await admin_service.listWaiters();
     const availableDays = await waiter_service.getAvailableDays();
 
+    console.log("Waiters:", waiters);
+ console.log("Available Days:", availableDays); 
+ console.log("Session Data:", req.session);
+ console.log("Error:", error.message);
 
     const waitersCount = waiters.length;
 

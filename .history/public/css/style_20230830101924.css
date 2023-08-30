@@ -426,7 +426,7 @@ input {
   background-color: #45a049;
 }
 
-/* checkbox */
+
 .schedule input[type="checkbox"] {
   transform: scale(1.5); /* Makes it 1.5 times bigger */
 }

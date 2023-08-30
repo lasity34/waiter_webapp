@@ -2,12 +2,11 @@ export default function admin_route(admin_service, waiter_service) {
   async function show(req, res) {
 
 
-  
+    console.log("Back To Admin button clicked. Navigating to admin page for username:", req.params.username);
 
     const username = req.params.username;
     const waiters = await admin_service.listWaiters();
     const availableDays = await waiter_service.getAvailableDays();
-
 
     const waitersCount = waiters.length;
 

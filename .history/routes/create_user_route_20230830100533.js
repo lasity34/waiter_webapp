@@ -3,16 +3,15 @@
 export default function create_user_route(admin_service) {
 
 
-  async function showCreateUserPage(req, res) {
-    try {
-      // Assuming admin username is stored in session as 'adminUsername'
-      res.render("created_user", { username: req.session.adminUsername });
-    } catch (error) {
-      console.error(error);
-      res.status(500).render("error", { message: "An error occurred" });
-    }
-  }
-  
+    async function showCreateUserPage(req, res) {
+        try {
+          res.render("created_user");
+        } catch (error) {
+          console.error(error);
+          res.status(500).render("error", { message: "An error occurred" });
+        }
+      }
+      
     
 
     async function createUser(req, res) {
@@ -40,7 +39,7 @@ export default function create_user_route(admin_service) {
             // Handle this specific error
             res.render("created_user", {
               notification: error.message,
-         
+              username: req.session.adminUsername
             });
           } else {
             // Handle other errors
