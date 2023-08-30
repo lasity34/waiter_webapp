@@ -99,28 +99,15 @@ export default function admin_route(admin_service, waiter_service) {
   async function removeWaiter(req, res) {
     const { day, shift, waiter } = req.body;
     const adminUsername = req.params.username;
-  
+    
     try {
-      // Remove the waiter from the database
-      await waiter_service.removeWaiterFromShift(waiter, day, shift);
-      
-      // Check if the session variable exists before manipulating it
-      if (req.session.checkedDays) {
-        const index = req.session.checkedDays.indexOf(`${day}-${shift}`);
-        if (index > -1) {
-          req.session.checkedDays.splice(index, 1);
-        }
-      }
-  
+      await waiter_service.removeWaiterFromShift(waiter, day, shift, req);  // Pass the request object
       res.redirect(`/admin/${adminUsername}`); // Redirect back to the admin page
     } catch (error) {
       console.error(error);
       res.status(500).send("An error occurred");
     }
   }
-  
-  
-  
   
   async function resetSchedule(req, res) {
     const adminUsername = req.params.username;

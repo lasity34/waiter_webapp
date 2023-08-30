@@ -56,7 +56,10 @@ export default function waiterService(db) {
     await db.none('DELETE FROM waiters_schedule WHERE username = $1 AND day = $2 AND time_slot = $3', [username, day, time_slot]);
 
     // Assuming you have access to the request object to modify the session
-  
+    const index = req.session.checkedDays.indexOf(`${day}-${time_slot}`);
+    if (index > -1) {
+      req.session.checkedDays.splice(index, 1);
+    }
 }
 
 

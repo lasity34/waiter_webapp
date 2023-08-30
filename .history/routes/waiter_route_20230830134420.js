@@ -4,8 +4,8 @@ export default function waiter_route(waiter_service) {
     const username = req.params.username;
     const selectedDays = req.body.days;
 
-    if (Object.keys(selectedDays).length < 3) {
-      req.session.notification = "Please select at least 3 days";
+    if (Object.keys(selectedDays).length < 2) {
+      req.session.notification = "Please select at least 2 days";
       return res.redirect(`/waiters/${username}`);
     }
     
