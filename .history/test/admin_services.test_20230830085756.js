@@ -27,7 +27,10 @@ describe("Admin Services", function () {
     // You can add more setup logic here
   });
 
-
+  it("should successfully connect to the database", async function () {
+    const result = await db.oneOrNone('SELECT 1');  
+    assert.strictEqual(result['?column?'], 1);  
+});
 
 
   it("should test if admin is fetched by username", async function () {

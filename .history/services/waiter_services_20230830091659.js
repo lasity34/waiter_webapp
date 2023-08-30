@@ -64,7 +64,6 @@ export default function waiterService(db) {
   return {
     getWaiterSchedule,
     getWaiterByUsername,
-    verifyPassword,
     saveSelectedDays,
     getAvailableDays,
     verifyCredentials,

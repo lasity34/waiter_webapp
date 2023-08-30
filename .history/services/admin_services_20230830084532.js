@@ -76,7 +76,16 @@ export default function adminService(db) {
             return await db.none('INSERT INTO public.admins (username, password) VALUES ($1, $2)', [username, passwordHash]);
         }
         
-    
+        async function updatePassword(username, newPasswordHash) {
+          try {
+            console.log("Updating password for username: ", username);
+            console.log("New hashed password: ", newPasswordHash);
+            await db.none('UPDATE public.admins SET password = $2 WHERE username = $1', [username, newPasswordHash]);
+            return { success: true, message: 'Password updated successfully.' };
+          } catch (error) {
+            return { success: false, message: error.message };
+          }
+        }
         
         async function deleteAdmin(username) {
           try {
@@ -100,7 +109,7 @@ export default function adminService(db) {
             verifyCredentials,
             deleteWaiterSchedule,
             insertAdmin,
-        
+            updatePassword,
             deleteAdmin
         }
 

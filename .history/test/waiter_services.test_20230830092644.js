@@ -64,7 +64,7 @@ describe("Waiter Services", function () {
 
 
   it("should test if waiter is created successfully", async function () {
-    const result = await admin.createUser("bjorn", "123");
+    const result = await waiter.createUser("bjorn", "123");
     assert.strictEqual(result.username, "bjorn");
   });
 });

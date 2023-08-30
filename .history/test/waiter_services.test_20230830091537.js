@@ -28,25 +28,18 @@ describe("Waiter Services", function () {
   });
 
   it("should test if waiter is fetched by username", async function () {
-  
+    // Assuming you have a method to insert a waiter
     await admin.createUser("john", "john123");  
     const waiterData = await waiter.getWaiterByUsername("john");
     assert.strictEqual(waiterData.username, "john");
   });
 
   it("should test if waiter schedule is fetched", async function () {
-
-    await admin.createUser("john", "john123"); 
-    const selectedDays = {
-      "Monday": { "morning": "on" }
-    };
-    await waiter.saveSelectedDays("john", selectedDays);  
-    const schedules = await waiter.getWaiterSchedule("john");
-    
-    assert.strictEqual(schedules[0].day, "Monday");
-    assert.strictEqual(schedules[0].time_slot, "morning");
+    // Assuming you have a method to insert a waiter's schedule
+    await waiter.insertSchedule("john", "Monday");  
+    const schedule = await waiter.getWaiterSchedule("john");
+    assert.strictEqual(schedule.day, "Monday");
   });
-  
 
   it("should test if password verification works", async function () {
     const hash = await bcrypt.hash('myPassword', 10);
@@ -54,17 +47,15 @@ describe("Waiter Services", function () {
     assert.strictEqual(isValid, true);
   });
 
-
-
   it("should test if credentials are verified", async function () {
-    await admin.createUser("john", "john123"); 
-    const waiterObject = await waiter.verifyCredentials("john", "john123");
-    assert.strictEqual(waiterObject.username, "john");
+    await waiter.insertWaiter("john", "john123");
+    const isValid = await waiter.verifyCredentials("john", "john123");
+    assert.strictEqual(isValid, true);
   });
 
 
   it("should test if waiter is created successfully", async function () {
-    const result = await admin.createUser("bjorn", "123");
-    assert.strictEqual(result.username, "bjorn");
+    const result = await waiter.createUser("new_waiter", "new_password");
+    assert.strictEqual(result.username, "new_waiter");
   });
 });

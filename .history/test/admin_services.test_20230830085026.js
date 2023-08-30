@@ -27,9 +27,6 @@ describe("Admin Services", function () {
     // You can add more setup logic here
   });
 
-
-
-
   it("should test if admin is fetched by username", async function () {
     await admin.insertAdmin("bjorn", "bjorn123");  // Assuming you have a method to insert an admin
     const adminData = await admin.getAdminByUsername("bjorn");

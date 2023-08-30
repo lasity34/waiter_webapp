@@ -58,13 +58,13 @@ describe("Waiter Services", function () {
 
   it("should test if credentials are verified", async function () {
     await admin.createUser("john", "john123"); 
-    const waiterObject = await waiter.verifyCredentials("john", "john123");
-    assert.strictEqual(waiterObject.username, "john");
+    const isValid = await waiter.verifyCredentials("john", "john123");
+    assert.strictEqual(isValid, true);
   });
 
 
   it("should test if waiter is created successfully", async function () {
-    const result = await admin.createUser("bjorn", "123");
-    assert.strictEqual(result.username, "bjorn");
+    const result = await waiter.createUser("new_waiter", "new_password");
+    assert.strictEqual(result.username, "new_waiter");
   });
 });

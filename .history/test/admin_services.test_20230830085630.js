@@ -27,8 +27,10 @@ describe("Admin Services", function () {
     // You can add more setup logic here
   });
 
-
-
+  it("should successfully connect to the database", async function () {
+    const result = await db.oneOrNone('SELECT 1'); // A simple query to test the connection
+    assert.strictEqual(result, 1);
+  });
 
   it("should test if admin is fetched by username", async function () {
     await admin.insertAdmin("bjorn", "bjorn123");  // Assuming you have a method to insert an admin

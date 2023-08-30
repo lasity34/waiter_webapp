@@ -27,9 +27,6 @@ describe("Admin Services", function () {
     // You can add more setup logic here
   });
 
-
-
-
   it("should test if admin is fetched by username", async function () {
     await admin.insertAdmin("bjorn", "bjorn123");  // Assuming you have a method to insert an admin
     const adminData = await admin.getAdminByUsername("bjorn");
@@ -55,7 +52,7 @@ describe("Admin Services", function () {
   it("should test if password verification fails for incorrect password", async function () {
     const saltRounds = 10;
     const correctPassword = "bjorn123";
-    const incorrectPassword = "bjorn12"; 
+    const incorrectPassword = "wrong_password"; 
     const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(correctPassword, salt);  
     
