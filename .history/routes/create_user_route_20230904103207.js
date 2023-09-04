@@ -21,7 +21,7 @@ export default function create_user_route(admin_service) {
   async function sendEmail(email, password) {
     const msg = {
       to: email, // Receiver's email
-      from: 'info@bestersrealty.com', // Sender's email
+      from: 'your-email@example.com', // Sender's email
       subject: 'Your password', // Subject line
       text: `Your initial password is: ${password}`, // Plain text body
     };

@@ -1,4 +1,4 @@
-import sgMail from '@sendgrid/mail';
+import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 
 
@@ -16,26 +16,55 @@ export default function create_user_route(admin_service) {
     }
   }
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   async function sendEmail(email, password) {
-    const msg = {
-      to: email, // Receiver's email
-      from: 'info@bestersrealty.com', // Sender's email
-      subject: 'Your password', // Subject line
-      text: `Your initial password is: ${password}`, // Plain text body
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+  
+    // setup email data
+    let mailOptions = {
+      from: '"waiters_web_app" <bjornworrall@gmail.com>', // sender address
+      to: email, // receiver's email
+      subject: "test", // Subject line
+      text: `test`, // plaintext body
+    };
+  
+    // send mail with defined transport object
+    await transporter.sendMail(mailOptions);
+  }
+
+  async function sendTestEmail() {
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+  
+    let mailOptions = {
+      from: 'youremail@gmail.com',
+      to: 'targetemail@gmail.com',
+      subject: 'Test',
+      text: 'This is a test email',
     };
   
     try {
-      await sgMail.send(msg);
+      let info = await transporter.sendMail(mailOptions);
+      console.log('Email sent: ' + info.response);
     } catch (error) {
-      console.error(error);
-  
-      if (error.response) {
-        console.error(error.response.body);
-      }
+      console.log('An error occurred: ' + error);
     }
   }
+  
+  sendTestEmail();
+  
 
   
     

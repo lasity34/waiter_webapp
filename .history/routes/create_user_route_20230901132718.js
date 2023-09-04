@@ -1,10 +1,7 @@
-import sgMail from '@sendgrid/mail';
-import dotenv from "dotenv";
-
+import nodemailer from "nodemailer";
 
 export default function create_user_route(admin_service) {
 
-  dotenv.config();
 
   async function showCreateUserPage(req, res) {
     try {
@@ -16,26 +13,29 @@ export default function create_user_route(admin_service) {
     }
   }
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   async function sendEmail(email, password) {
-    const msg = {
-      to: email, // Receiver's email
-      from: 'info@bestersrealty.com', // Sender's email
-      subject: 'Your password', // Subject line
-      text: `Your initial password is: ${password}`, // Plain text body
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+  
+    // setup email data
+    let mailOptions = {
+      from: '"waiters_web_app" <bjornworrall@gmail.com>', // sender address
+      to: email, // receiver's email
+      subject: "Your Account Password", // Subject line
+      text: `Your password is: ${password}`, // plaintext body
     };
   
-    try {
-      await sgMail.send(msg);
-    } catch (error) {
-      console.error(error);
-  
-      if (error.response) {
-        console.error(error.response.body);
-      }
-    }
+    // send mail with defined transport object
+    await transporter.sendMail(mailOptions);
   }
+  
 
   
     
@@ -75,7 +75,6 @@ export default function create_user_route(admin_service) {
         }
       }
 
-     
  
 
 

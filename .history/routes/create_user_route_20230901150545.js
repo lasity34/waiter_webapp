@@ -1,4 +1,4 @@
-import sgMail from '@sendgrid/mail';
+
 import dotenv from "dotenv";
 
 
@@ -16,26 +16,7 @@ export default function create_user_route(admin_service) {
     }
   }
 
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-  async function sendEmail(email, password) {
-    const msg = {
-      to: email, // Receiver's email
-      from: 'info@bestersrealty.com', // Sender's email
-      subject: 'Your password', // Subject line
-      text: `Your initial password is: ${password}`, // Plain text body
-    };
-  
-    try {
-      await sgMail.send(msg);
-    } catch (error) {
-      console.error(error);
-  
-      if (error.response) {
-        console.error(error.response.body);
-      }
-    }
-  }
 
   
     
@@ -55,7 +36,7 @@ export default function create_user_route(admin_service) {
             });
           } else {
             const newUser = await admin_service.createUser(username, password);
-            await sendEmail(email, password);
+           
             req.session.notification = "User Successfully created"
             res.redirect(`/admin/${username}`);
             req.session.notification = null
@@ -82,7 +63,7 @@ export default function create_user_route(admin_service) {
       return {
         createUser,
         showCreateUserPage,
-        sendEmail
+      
       }
 
 

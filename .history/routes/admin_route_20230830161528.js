@@ -5,6 +5,7 @@ export default function admin_route(admin_service, waiter_service) {
     const waiters = await admin_service.listWaiters();
     const availableDays = await waiter_service.getAvailableDays();
 
+
     const waitersCount = waiters.length;
 
     // Constructing the schedule object

@@ -1,10 +1,6 @@
-import sgMail from '@sendgrid/mail';
-import dotenv from "dotenv";
-
+import nodemailer from "nodemailer";
 
 export default function create_user_route(admin_service) {
-
-  dotenv.config();
 
   async function showCreateUserPage(req, res) {
     try {
@@ -15,36 +11,14 @@ export default function create_user_route(admin_service) {
       res.status(500).render("error", { message: "An error occurred" });
     }
   }
-
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-  async function sendEmail(email, password) {
-    const msg = {
-      to: email, // Receiver's email
-      from: 'info@bestersrealty.com', // Sender's email
-      subject: 'Your password', // Subject line
-      text: `Your initial password is: ${password}`, // Plain text body
-    };
-  
-    try {
-      await sgMail.send(msg);
-    } catch (error) {
-      console.error(error);
-  
-      if (error.response) {
-        console.error(error.response.body);
-      }
-    }
-  }
-
   
     
     async function createUser(req, res) {
         try {
-          let { username, password, email } = req.body;
+          let { username, password } = req.body;
 
           const existingUser = await admin_service.getAdminByUsername(username);
-       
+    
           if (existingUser) {
             // If the user already exists, render the admin page with a message
             const waiters = await admin_service.listWaiters();
@@ -55,7 +29,6 @@ export default function create_user_route(admin_service) {
             });
           } else {
             const newUser = await admin_service.createUser(username, password);
-            await sendEmail(email, password);
             req.session.notification = "User Successfully created"
             res.redirect(`/admin/${username}`);
             req.session.notification = null
@@ -75,8 +48,28 @@ export default function create_user_route(admin_service) {
         }
       }
 
-     
- 
+      async function sendEmail(email, password) {
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.EMAIL_USERNAME,
+            pass: process.env.EMAIL_PASSWORD,
+          },
+        });
+      
+        // setup email data
+        let mailOptions = {
+          from: '"waiters_web_app" <bjornworrall@gmail.com>', // sender address
+          to: email, // receiver's email
+          subject: "Your Account Password", // Subject line
+          text: `Your password is: ${password}`, // plaintext body
+        };
+      
+        // send mail with defined transport object
+        await transporter.sendMail(mailOptions);
+      }
+      
 
 
       return {
