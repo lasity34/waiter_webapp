@@ -19,6 +19,9 @@
 
 A web application designed to help manage waiter shifts at a coffee shop. The app allows waiters to select and update the days they can work while enabling the admin to view the availability and reset data for a new week.
 
+login for admin 
+name: lyla
+password: lyla123
 ---
 
 ## Tech Stack 💻
